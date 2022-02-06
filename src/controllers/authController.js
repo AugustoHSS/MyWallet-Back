@@ -8,7 +8,7 @@ export async function signUp(request, response) {
   try {
     const emailTaken = await db.collection('users').findOne({ email: user.email });
     if (emailTaken) {
-      response.sendStatus(409);
+      response.status(409).send('Este email já está em uso');
       return;
     }
     await db.collection('users').insertOne({ ...user, password: passwordHashed });
