@@ -29,7 +29,8 @@ export async function signIn(request, response) {
         token,
         userId: user._id,
       });
-      response.sendStatus(200);
+      delete user.password;
+      response.status(200).send({ ...user, token });
     } else {
       response.status(401).send('email ou senha invalidos');
     }
